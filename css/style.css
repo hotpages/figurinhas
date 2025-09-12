@@ -1,46 +1,88 @@
-/* Estilo geral */
-body {
-    background-color: #212121;
-    color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+/* === CONFIGURAÇÃO GLOBAL E VARIÁVEIS DE COR === */
+:root {
+    --cor-fundo: #0F0F1A;
+    --cor-card: #1A1A2E;
+    --cor-texto-primario: #E0E0E0;
+    --cor-texto-secundario: #a0a0c0;
+    --cor-destaque: #00BFFF; /* Deep Sky Blue - Um azul tecnológico */
+    --cor-destaque-hover: #00FFFF; /* Cyan */
+    --sombra-glow: 0 0 15px rgba(0, 191, 255, 0.4);
+}
+
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
     box-sizing: border-box;
 }
 
-header h1 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+body {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-primario);
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+    scroll-behavior: smooth;
 }
 
 hr {
     border: none;
-    border-top: 1px solid #444;
-    margin: 25px 0;
+    border-top: 1px solid var(--cor-card);
+    margin: 30px 0;
 }
 
-/* Seção de Categorias */
+/* === BANNERS === */
+.banner-container-topo, .banner-container-rodape {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 728px;
+}
+.banner-link img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.banner-link:hover img {
+    transform: scale(1.02);
+    box-shadow: var(--sombra-glow);
+}
+
+
+/* === CABEÇALHO E TÍTULOS === */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.main-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--cor-destaque);
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
 #categorias-section h2 {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 1rem;
-    color: #aaa;
-    margin-left: 5px;
+    gap: 10px;
+    font-size: 1.2rem;
+    color: var(--cor-texto-secundario);
     text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
 }
 
+/* === SEÇÃO DE CATEGORIAS INTERATIVA === */
 #categorias-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
+    gap: 12px;
 }
 
 .categoria-btn {
-    background-color: #333;
-    color: #fff;
-    border: none;
+    background-color: var(--cor-card);
+    color: var(--cor-texto-primario);
+    border: 1px solid transparent;
     padding: 12px 15px;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -50,22 +92,29 @@ hr {
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: background-color 0.2s;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    transition: all 0.3s ease;
 }
-
 .categoria-btn:hover {
-    background-color: #444;
+    transform: translateY(-3px);
+    background-color: #2a2a4a;
+    border-color: var(--cor-destaque);
+}
+.categoria-btn.active {
+    background-color: var(--cor-destaque);
+    color: var(--cor-fundo);
+    font-weight: 600;
+    box-shadow: var(--sombra-glow);
+}
+.categoria-btn.active .folder-icon {
+    color: var(--cor-fundo) !important;
 }
 
-.categoria-btn .folder-icon {
-    font-family: 'Material Icons';
-    font-size: 20px;
+/* === ANIMAÇÕES E INTERATIVIDADE (FIGURINHAS) === */
+#figurinhas-section {
+    position: relative;
+    min-height: 200px; /* Evita que a página pule enquanto carrega */
 }
 
-/* Seção de Figurinhas */
 #figurinhas-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -74,7 +123,7 @@ hr {
 }
 
 .figurinha-card {
-    background-color: #333;
+    background-color: var(--cor-card);
     border-radius: 10px;
     padding: 10px;
     display: flex;
@@ -82,6 +131,13 @@ hr {
     align-items: center;
     justify-content: space-between;
     text-align: center;
+    border: 1px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    animation: fadeIn 0.5s ease forwards;
+}
+.figurinha-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cor-destaque-hover);
 }
 
 .figurinha-card img {
@@ -97,7 +153,6 @@ hr {
     flex-direction: column;
     gap: 8px;
 }
-
 .botoes-container a {
     text-decoration: none;
     padding: 10px;
@@ -108,26 +163,53 @@ hr {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: opacity 0.2s;
-}
-
-.botoes-container a:hover {
-    opacity: 0.8;
+    transition: background-color 0.3s ease;
 }
 
 .btn-baixar {
-    background-color: #ffa500; /* Laranja */
-    color: #000;
+    background-color: var(--cor-destaque);
+    color: var(--cor-fundo);
+}
+.btn-baixar:hover {
+    background-color: var(--cor-destaque-hover);
 }
 
 .btn-visualizar {
-    background-color: #fff; /* Branco */
-    color: #000;
+    background-color: var(--cor-texto-primario);
+    color: var(--cor-fundo);
+}
+.btn-visualizar:hover {
+    background-color: #ffffff;
 }
 
+/* Animação de Fade-in para os cards */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animação de Carregando (Spinner) */
+#loading-spinner {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--cor-card);
+    border-top-color: var(--cor-destaque);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* === RODAPÉ === */
 footer {
     text-align: center;
     margin-top: 40px;
-    color: #777;
+    color: var(--cor-texto-secundario);
     font-size: 0.8rem;
 }
